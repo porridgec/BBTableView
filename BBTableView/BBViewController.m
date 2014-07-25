@@ -36,7 +36,8 @@
     myTableView.delegate = self;
     myTableView.dataSource = self;
     [self.view addSubview:myTableView];
-}
+    
+    }
 
 - (void)didReceiveMemoryWarning
 {
@@ -55,6 +56,10 @@
 }
 */
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 10;
@@ -75,9 +80,24 @@
         }
     }
     
+    UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(120, 3, 50, 50)];
+    iv.animationImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"1"],
+                          [UIImage imageNamed:@"2"],
+                          [UIImage imageNamed:@"3"],
+                          [UIImage imageNamed:@"4"],nil];
+    iv.animationDuration = 0.5f;
+    [iv startAnimating];
+    iv.backgroundColor = [UIColor redColor];
+    [cell addSubview:iv];
+
+    
     cell.textLabel.text = @"sdasd";
-    cell.backgroundColor = [UIColor greenColor];
+    //cell.backgroundColor = [UIColor greenColor];
     return cell;
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 @end
